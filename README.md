@@ -1,6 +1,6 @@
 # local_git
 
-In this repository, you can manage local file by git.
+In this repository, you can manage local files by git.
 
 ## disable git push command in this repository
 ```
