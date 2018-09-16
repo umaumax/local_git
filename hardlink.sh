@@ -6,8 +6,8 @@ function echo() { command echo -e "$@"; }
 cmdcheck() { type >/dev/null 2>&1 "$@"; }
 function hardlink() {
 	hardlink_ "$@"
-	[[ $? == 0 ]] && echo "${GREEN}✔${DEFAULT} $@" && return
-	echo "${RED}✘${DEFAULT} $@" && return 1
+	[[ $? == 0 ]] && echo "${GREEN}✔${DEFAULT}" "$@" && return
+	echo "${RED}✘${DEFAULT}" "$@" && return 1
 }
 function hardlink_() {
 	[[ $# == 0 ]] && echo "$0 <filepath>" && return 1
@@ -18,13 +18,14 @@ function hardlink_() {
 		return 0
 	elif [[ -d "$src_filepath" ]]; then
 		mkdir -p "$dst_filepath"
-		if [[ $(uname -a) =~ "Ubuntu" ]]; then
-			ln -F "$src_filepath" "$dst_filepath"
-			return
-		elif [[ $(uname) == "Darwin" ]]; then
-			cp -r "$src_filepath" "$dst_filepath"
-			return
-		fi
+		# 		if [[ $(uname -a) =~ "Ubuntu" ]]; then
+		# NOTE: don't use directory symbolic link...
+		# 			sudo ln -F "$src_filepath" "$dst_filepath"
+		# 			return
+		# 		elif [[ $(uname) == "Darwin" ]]; then
+		cp -r "$src_filepath" "$dst_filepath"
+		return
+		# 		fi
 	fi
 	return 1
 }
@@ -40,3 +41,4 @@ hardlink ~/.local.zprofile
 hardlink ~/.local.zshrc
 
 hardlink /etc/network/interfaces
+hardlink /etc/environment
