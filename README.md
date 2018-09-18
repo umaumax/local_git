@@ -9,7 +9,7 @@ In this repository, you can manage local files by git.
 
 ## update local files under git management
 ```
-./hardlink.sh
+./copy.sh
 ```
 
 if your OS is Mac OS X, technically files are copied not hardlink
