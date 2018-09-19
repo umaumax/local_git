@@ -43,7 +43,10 @@ hardlink ~/.local.zshenv
 hardlink ~/.local.zprofile
 hardlink ~/.local.zshrc
 
-hardlink /etc/network/interfaces
-hardlink /etc/environment
+if [[ $(uname) == "Linux" ]]; then
+	hardlink /etc/network/interfaces
+	hardlink /etc/environment
+	hardlink /etc/dhcp/dhclient.conf
+fi
 
 git status
